@@ -21,10 +21,14 @@ const sqrtOfsumOfSquaredDivisors = num => {
   return result;
 };
 
-const listSquared = (firstNum, secondNum) => {
-  const finalList = [];
-  for (let i = firstNum; i < secondNum; i++) {
-    finalList.push(sqrtOfsumOfSquaredDivisors(i));
+const listSquared = (m, n) => {
+  let arr = [];
+  for (let i = m; i <= n; i++) {
+    let temp = 0;
+    for (let j = 1; j <= i; j++) {
+      if (i % j == 0) temp += j * j;
+    }
+    if (Math.sqrt(temp) % 1 == 0) arr.push([i, temp]);
   }
-  return finalList.filter(el => el); // Remove undefined values
+  return arr;
 };
