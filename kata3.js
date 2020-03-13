@@ -12,10 +12,12 @@ const loose_change = input => {
   };
 
   if (input <= 0) {
+    // If entered currency is 0 or a negative value, return the default currency values
     return currency;
   }
 
   if (input % 1 !== 0) {
+    // if input is float, round it down to the nearest value
     input = Math.floor(input);
   }
 
