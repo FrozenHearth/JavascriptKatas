@@ -1,12 +1,20 @@
 const openOrSenior = (...memberDetails) => {
   // Using spread operator to accept multiple arrays as input
-  const membershipCategories = memberDetails
+
+  const membershipCategories = memberDetails[0]
     .map(details => {
-      const [age, handicapLevel] = details; // Get the first and second elements of each array (age & handicapLevel)
+      const [age, handicapLevel] = details;
+      // Get the first and second elements of each array (age & handicapLevel)
+
       let output = [];
-      if (age > 55 && handicapLevel > 7) {
+      if (age >= 55 && handicapLevel > 7) {
         output.push('Senior');
-      } else if (age !== 55 && handicapLevel <= 7) {
+      } else if (
+        (age < 55 && handicapLevel <= 7) ||
+        (age > 55 && handicapLevel <= 7) ||
+        (age >= 55 && handicapLevel <= 7) ||
+        (age < 55 && handicapLevel > 7)
+      ) {
         output.push('Open');
       } else {
         return;
@@ -19,5 +27,6 @@ const openOrSenior = (...memberDetails) => {
       );
     })
     .filter(el => el); // Remove undefined values
+
   return membershipCategories;
 };
