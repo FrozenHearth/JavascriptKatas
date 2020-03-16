@@ -2,13 +2,22 @@ const scale = (str, k, v) => {
   if (str === '') {
     return '';
   } else {
-    const string = str
-      .split('')
-      .map(el => el.repeat(k)) // Iterate over the string and repeat each character k times (horizontal scaling)
-      .join('')
-      .split('\n') // Split the string into substring of group of characters before \n
-      .map(el => el.repeat(v)) // Iterate over the horizontally scaled string and repeat it v times (vertical scaling)
+    const scaledString = str
+      .split('\n')
+      .map(item =>
+        item
+          .split('')
+          .map(item => item.repeat(k)) // Map over the string and repeat each character k times (horizontal scaling)
+          .join('')
+      )
+      .map(
+        item =>
+          (item + ' ') // Add whitespace after each substring
+            .repeat(v) // Map over the horizontally scaled string and repeat it v times (vertical scaling)
+            .trim() // Remove whitespace after end of each set of repeated substrings.
+            .replace(/ /g, '\n') // Replace all remaining whitespaces with newline
+      )
       .join('\n');
-    return string;
+    return scaledString;
   }
 };
